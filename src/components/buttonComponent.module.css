@@ -1,0 +1,19 @@
+.buttonNext {
+    background-color: #174a89;
+    border: none;
+    font-size: 16px;
+    padding: 12px 26px;
+    font-weight: 600;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    color: hsl(231, 11%, 63%);
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #02295a;
+}
