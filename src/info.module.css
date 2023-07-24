@@ -1,0 +1,14 @@
+.title{
+    color: hsl(213, 96%, 18%);
+    font-weight: bold;
+}
+
+.formLabel {
+    color: hsl(213, 96%, 18%);
+    font-weight: 500;
+}
+
+::placeholder {
+    color: hsl(231, 11%, 63%) !important;
+    opacity: 1;
+}
