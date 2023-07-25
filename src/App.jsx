@@ -5,17 +5,20 @@ import Plan from "./Plan";
 import AddOns from "./AddOns";
 import Summary from "./Summary";
 import Layout from "./Layout";
+import { FormProvider } from "./context";
 
 function App() {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Info />} />
-        <Route path="/plan" element={<Plan />} />
-        <Route path="/addons" element={<AddOns />} />
-        <Route path="/summary" element={<Summary />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <FormProvider>
+        <Routes>
+          <Route path="/" element={<Info />} />
+          <Route path="/plan" element={<Plan />} />
+          <Route path="/addons" element={<AddOns />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </FormProvider>
     </Layout>
   );
 }

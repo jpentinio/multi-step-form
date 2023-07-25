@@ -9,6 +9,7 @@
     color: hsl(213, 96%, 18%);
     font-size: 18px;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .change {
@@ -37,4 +38,15 @@
 .total{
     font-size: 24px;
     color: hsl(243, 100%, 62%);
+}
+
+.confirm {
+    position: absolute;
+    top: 40px;
+    bottom: 80px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

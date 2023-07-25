@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import styles from "./buttonComponent.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const ButtonComponent = ({ text, next, hideGoBackBtn }) => {
+const ButtonComponent = ({ text, handleNext, hideGoBackBtn }) => {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +19,8 @@ const ButtonComponent = ({ text, next, hideGoBackBtn }) => {
         Go Back
       </Link>
       <Button
-        onClick={() => navigate(next)}
+        type="submit"
+        onClick={handleNext}
         size="lg"
         className={styles.buttonNext}
       >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormTitle from "./components/FormTitle";
 import ButtonComponent from "./components/ButtonComponent";
 import PlanItem from "./components/PlanItem";
@@ -7,41 +7,80 @@ import advancedIcon from "./assets/icon-advanced.svg";
 import proIcon from "./assets/icon-pro.svg";
 import styles from "./plan.module.css";
 import Switch from "react-switch";
+import { FormContext } from "./context";
+import { useNavigate } from "react-router-dom";
 
-const planItems = [
-  { icon: arcadeIcon, text: "Arcade", amount: 9 },
-  { icon: advancedIcon, text: "Advanced", amount: 12 },
-  { icon: proIcon, text: "Pro", amount: 15 },
+export const planItems = [
+  { icon: arcadeIcon, text: "Arcade", monthly: 9, yearly: 90 },
+  { icon: advancedIcon, text: "Advanced", monthly: 12, yearly: 120 },
+  { icon: proIcon, text: "Pro", monthly: 15, yearly: 150 },
 ];
 
 const Plan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
-  const [checked, setChecked] = useState(false);
+  const navigate = useNavigate();
+  const { values, setValues } = useContext(FormContext);
+  // const [selectedPlan, setSelectedPlan] = useState(values?.plan);
+  const [checked, setChecked] = useState(
+    values?.plan.billing === "yearly" ? true : false
+  );
+  const [error, setError] = useState(false);
 
   const handleSwitch = (checked) => {
     setChecked(checked);
+    let newPlanAmount =
+      values?.plan.name &&
+      planItems.filter((i) => values?.plan.name === i.text);
+    setValues({
+      ...values,
+      plan: {
+        ...values?.plan,
+        amount: !checked ? newPlanAmount[0].monthly : newPlanAmount[0].yearly,
+        billing: !checked ? "monthly" : "yearly",
+      },
+    });
   };
 
   const handlePlan = (selectedPlan) => {
-    setSelectedPlan(selectedPlan);
+    setError(false);
+    setValues({
+      ...values,
+      plan: { ...selectedPlan, billing: !checked ? "monthly" : "yearly" },
+    });
   };
+
+  const handleNext = () => {
+    if (!values?.plan.name) {
+      setError(true);
+    } else {
+      navigate("/addons");
+    }
+  };
+
   return (
     <div>
       <FormTitle
         title="Select your plan"
         text="You have the option of monthly or yearly billing."
       />
-      <div className="my-5" style={{ display: "flex", gap: 18 }}>
-        {planItems.map((item, index) => (
-          <PlanItem
-            key={index}
-            icon={item.icon}
-            text={item.text}
-            amount={item.amount}
-            handlePlan={handlePlan}
-            selectedPlan={selectedPlan}
-          />
-        ))}
+      <div className="my-5">
+        <div style={{ display: "flex", gap: 18 }}>
+          {planItems.map((item, index) => (
+            <PlanItem
+              key={index}
+              icon={item.icon}
+              text={item.text}
+              amount={checked ? item.yearly : item.monthly}
+              handlePlan={handlePlan}
+              selectedPlan={values?.plan}
+              isYearly={checked}
+            />
+          ))}
+        </div>
+        {error && (
+          <div className="mt-3" style={{ color: "red" }}>
+            Please select your plan
+          </div>
+        )}
       </div>
       <div className={styles.toggle}>
         <div
@@ -69,7 +108,7 @@ const Plan = () => {
         </div>
       </div>
 
-      <ButtonComponent text="Next Step" next="/addons" />
+      <ButtonComponent text="Next Step" handleNext={handleNext} />
     </div>
   );
 };

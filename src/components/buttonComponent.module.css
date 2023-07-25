@@ -1,9 +1,13 @@
 .buttonNext {
-    background-color: #174a89;
+    background-color: #174a89 !important;
     border: none;
-    font-size: 16px;
-    padding: 12px 26px;
+    font-size: 16px !important;
+    padding: 12px 26px !important;
     font-weight: 600;
+}
+
+.buttonNext:hover {
+    background-color: hsl(243, 100%, 62%) !important;
 }
 
 .link {

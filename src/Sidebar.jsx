@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <div className={styles.container}>
       {links.map((link) => (
-        <Link key={link.id} to={link.path} className={styles.link}>
+        <div key={link.id} className={styles.link}>
           <div
             className={styles.linkId}
             style={{
@@ -30,7 +30,7 @@ const Sidebar = () => {
             <div>STEP {link.id}</div>
             <strong className="text-light">{link.name}</strong>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

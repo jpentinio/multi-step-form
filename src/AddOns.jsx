@@ -1,31 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormTitle from "./components/FormTitle";
 import styles from "./addOns.module.css";
 import { Form } from "react-bootstrap";
 import ButtonComponent from "./components/ButtonComponent";
+import { FormContext } from "./context";
+import { useNavigate } from "react-router-dom";
 
-const addOnsItems = [
-  { title: "Online service", text: "Access to multiplayer games", months: 1 },
-  { title: "Larger storage", text: "Extra 1TB of cloud save", months: 2 },
+export const addOnsItems = [
+  {
+    title: "Online service",
+    text: "Access to multiplayer games",
+    monthly: 1,
+    yearly: 10,
+  },
+  {
+    title: "Larger storage",
+    text: "Extra 1TB of cloud save",
+    monthly: 2,
+    yearly: 20,
+  },
   {
     title: "Customizable Profile",
     text: "Custom theme on your profile",
-    months: 2,
+    monthly: 2,
+    yearly: 20,
   },
 ];
 
 const AddOns = () => {
-  const [addOns, setAddOns] = useState([]);
+  const navigate = useNavigate();
+  const { values, setValues } = useContext(FormContext);
+  const [addOns, setAddOns] = useState(values?.addOns);
+  const [error, setError] = useState(false);
 
   const handleAddOns = (value) => {
-    if (addOns.includes(value)) {
-      setAddOns(addOns.filter((item) => item !== value));
+    if (addOns.map((item) => item.addOn).includes(value.addOn)) {
+      setAddOns(addOns.filter((item) => item.addOn !== value.addOn));
     } else {
       setAddOns((prev) => [...prev, value]);
     }
   };
 
-  console.log(addOns);
+  const handleNext = () => {
+    setValues({
+      ...values,
+      addOns,
+    });
+    navigate("/summary");
+  };
+
   return (
     <div>
       <FormTitle
@@ -38,27 +61,49 @@ const AddOns = () => {
             key={index}
             className={styles.addOnsItem}
             style={{
-              backgroundColor: addOns.includes(item.title) && "#f8f9fe",
-              borderColor: addOns.includes(item.title) && "hsl(243, 100%, 62%)",
+              backgroundColor:
+                addOns.map((item) => item.addOn).includes(item.title) &&
+                "#f8f9fe",
+              borderColor:
+                addOns.map((item) => item.addOn).includes(item.title) &&
+                "hsl(243, 100%, 62%)",
             }}
-            onClick={() => handleAddOns(item.title)}
+            onClick={() =>
+              handleAddOns({
+                addOn: item.title,
+                value:
+                  values?.plan.billing === "yearly"
+                    ? item.yearly
+                    : item.monthly,
+              })
+            }
           >
             <div className="d-flex align-items-center">
               <input
                 type="checkbox"
                 className={styles.checkbox}
-                checked={addOns.includes(item.title)}
+                checked={addOns.map((item) => item.addOn).includes(item.title)}
               />
               <div style={{ marginLeft: 30 }}>
                 <div className={styles.addOnsTitle}>{item.title}</div>
                 <div className={styles.addOnsText}>{item.text}</div>
               </div>
             </div>
-            <div className={styles.addOnsMonth}>+${item.months}/mo</div>
+            <div className={styles.addOnsMonth}>
+              +$
+              {values?.plan.billing === "yearly"
+                ? `${item.yearly}/yr`
+                : `${item.monthly}/mo`}
+            </div>
           </div>
         ))}
+        {error && (
+          <div className="mt-3" style={{ color: "red" }}>
+            Please select add-ons
+          </div>
+        )}
       </div>
-      <ButtonComponent text="Next Step" next="/summary" />
+      <ButtonComponent text="Next Step" handleNext={handleNext} />
     </div>
   );
 };
