@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Info = () => {
   const navigate = useNavigate();
-  const { values, setValues } = useContext(FormContext);
+  const { values, setValues, isMobile } = useContext(FormContext);
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
@@ -42,7 +42,7 @@ const Info = () => {
         title="Personal Info"
         text="Please provide your name, email address, and phone number."
       />
-      <div className="my-5">
+      <div className="my-md-5 my-2">
         <Form.Group className="mb-4" controlId="formName">
           <Form.Label className={styles.formLabel}>Name</Form.Label>
           <Form.Control
@@ -50,7 +50,7 @@ const Info = () => {
             type="text"
             value={values?.name}
             placeholder="e.g. Stephen King"
-            size="lg"
+            size={isMobile ? "sm" : "lg"}
             required
             onChange={handleChange}
           />
@@ -62,7 +62,7 @@ const Info = () => {
             type="email"
             value={values?.email}
             placeholder="e.g. stephenking@lorem.com"
-            size="lg"
+            size={isMobile ? "sm" : "lg"}
             required
             onChange={handleChange}
           />
@@ -74,7 +74,7 @@ const Info = () => {
             type="number"
             value={values?.phoneNumber}
             placeholder="e.g. 0912 345 6789"
-            size="lg"
+            size={isMobile ? "sm" : "lg"}
             required
             maxLength={11}
             onChange={handleChange}

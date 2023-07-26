@@ -8,7 +8,7 @@ import { planItems } from "./Plan";
 import { addOnsItems } from "./AddOns";
 
 const Summary = () => {
-  const { values, setValues } = useContext(FormContext);
+  const { values, setValues, isMobile } = useContext(FormContext);
   const [isConfirm, setIsConfirm] = useState(false);
 
   const changePlanAmount = (plan) => {
@@ -99,7 +99,7 @@ const Summary = () => {
               : ""}
           </div>
           <div
-            style={{ padding: "0 26px" }}
+            style={{ padding: isMobile ? 26 : "0 26px" }}
             className="d-flex justify-content-between align-items-center"
           >
             <div className={styles.totalText}>

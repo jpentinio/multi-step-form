@@ -18,3 +18,18 @@
         padding: 20px;
     }
 }
+
+.planItems {
+    display: flex;
+    gap: 18px
+}
+
+@media only screen and (max-width: 600px) {
+    .planItems{
+        flex-direction: column;
+    }
+
+    .toggle {
+        margin-bottom: 14px;
+    }
+}

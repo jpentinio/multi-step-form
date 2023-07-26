@@ -49,4 +49,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        margin: 20px 0;
+    }
+
+    .plan {
+        font-size: 16px;
+    }
+
+    .addOns, .month, .change{
+        font-size: 14px;
+    }
+
+    .total{
+        font-size: 20px;
+    }
+
+    .confirm {
+       position: static;
+    }
+    
 }

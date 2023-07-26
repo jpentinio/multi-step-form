@@ -29,7 +29,7 @@ export const addOnsItems = [
 
 const AddOns = () => {
   const navigate = useNavigate();
-  const { values, setValues } = useContext(FormContext);
+  const { values, setValues, isMobile } = useContext(FormContext);
   const [addOns, setAddOns] = useState(values?.addOns);
   const [error, setError] = useState(false);
 
@@ -84,7 +84,7 @@ const AddOns = () => {
                 className={styles.checkbox}
                 checked={addOns.map((item) => item.addOn).includes(item.title)}
               />
-              <div style={{ marginLeft: 30 }}>
+              <div style={{ marginLeft: isMobile ? 14 : 30 }}>
                 <div className={styles.addOnsTitle}>{item.title}</div>
                 <div className={styles.addOnsText}>{item.text}</div>
               </div>

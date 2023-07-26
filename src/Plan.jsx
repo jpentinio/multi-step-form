@@ -62,8 +62,8 @@ const Plan = () => {
         title="Select your plan"
         text="You have the option of monthly or yearly billing."
       />
-      <div className="my-5">
-        <div style={{ display: "flex", gap: 18 }}>
+      <div className="my-md-5 my-3">
+        <div className={styles.planItems}>
           {planItems.map((item, index) => (
             <PlanItem
               key={index}

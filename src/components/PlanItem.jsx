@@ -21,7 +21,7 @@ const PlanItem = ({
       }}
     >
       <img src={icon} alt="icon" className={styles.icon} />
-      <div className="mt-5">
+      <div className={styles.planText}>
         <div className={styles.text}>{text}</div>
         <div className={styles.amount}>
           ${amount}

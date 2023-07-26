@@ -16,6 +16,9 @@ export const initialState = {
 export const FormProvider = ({ children }) => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const isMobile = width <= 768;
 
   const updateAddOns = (billing, addOns) => {
     let newAddOns = addOnsItems.filter((i) =>
@@ -29,6 +32,10 @@ export const FormProvider = ({ children }) => {
     });
   };
 
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+
   useEffect(() => {
     setValues((prevState) => ({
       ...prevState,
@@ -37,12 +44,17 @@ export const FormProvider = ({ children }) => {
   }, [values?.plan.billing]);
 
   useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
     if (!values?.plan.name) {
       navigate("/");
     }
+
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
   }, []);
   return (
-    <FormContext.Provider value={{ values, setValues }}>
+    <FormContext.Provider value={{ values, setValues, isMobile }}>
       {children}
     </FormContext.Provider>
   );

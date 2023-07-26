@@ -26,7 +26,7 @@ const Sidebar = () => {
           >
             {link.id}
           </div>
-          <div className="mx-3">
+          <div className={styles.linkName}>
             <div>STEP {link.id}</div>
             <strong className="text-light">{link.name}</strong>
           </div>
