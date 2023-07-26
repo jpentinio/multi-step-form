@@ -27,3 +27,19 @@
     color: hsl(231, 11%, 63%);
     font-weight: 500;
 }
+
+.planText{
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        display: flex;
+        align-items: center;
+    }
+
+    .planText{
+        margin-left: 14px;
+        margin-top: 0px;
+    }
+}

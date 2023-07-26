@@ -1,9 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 100px;
+    right: 100px;
+    bottom: 40px
+}
+
 .buttonNext {
-    background-color: #174a89;
+    background-color: #174a89 !important;
     border: none;
-    font-size: 16px;
-    padding: 12px 26px;
+    font-size: 16px !important;
+    padding: 12px 26px !important;
     font-weight: 600;
+}
+
+.buttonNext:hover {
+    background-color: hsl(243, 100%, 62%) !important;
 }
 
 .link {
@@ -16,4 +30,15 @@
 
 .link:hover {
     color: #02295a;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        position: static;
+    }
+
+    .buttonNext {
+        font-size: 14px !important;
+        padding: 10px 20px !important;
+    }
 }

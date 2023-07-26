@@ -31,10 +31,32 @@
     
 }
 
-.link:hover {
+.linkName {
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        align-items: start;
+        justify-content: center;
+        flex-direction: row;
+        border-radius: 0;
+        background-image: url("./assets/bg-sidebar-mobile.svg");
+    }
+
+    .linkName {
+        display: none;
+    }
+
+    .linkId{
+        width: 35px;
+        height: 35px;
+    }
+}
+/* .link:hover {
     .linkId{
         background-color: #bfe2fd;
         color: #473dff;
     }
-}
+} */
 
