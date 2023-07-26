@@ -13,7 +13,6 @@ This is a solution to the [Multi-step form challenge on Frontend Mentor](https:/
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -51,7 +50,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://multi-step-form-black-rho.vercel.app/)
+- Live Site URL: [Multi-step-form](https://multi-step-form-black-rho.vercel.app/)
 
 ## My process
 
@@ -91,4 +90,4 @@ const { values, setValues, isMobile } = useContext(FormContext);
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/jpentinio)
+- Frontend Mentor - [@jpentinio](https://www.frontendmentor.io/profile/jpentinio)
